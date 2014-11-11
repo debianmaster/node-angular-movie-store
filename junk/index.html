@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="nameApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lyrics </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body  ng-controller="MovieCtrl">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Lyrics</a>
+            </div>
+            <!-- /.navbar-header -->
+
+
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..." ng-model="query">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <span ng-repeat="movie in movies | filter:query">
+                        <li>
+                            <a href="#" ng-click="selectMovie(movie)">&nbsp;{{movie.name}}</a>
+                        </li>
+                        </span>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <br/>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Movie Details
+                            <button type="button" class="btn btn-primary" ng-click="addMovie()">Add</button>
+                            <button type="button" class="btn btn-primary" ng-click="saveMovie(movie)">Save</button>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <input type="hidden"  ng-model="movie.objectId">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <tbody>
+                                    <tr class="gradeC">
+                                        <td><input type="text" placeholder="Movie Name" ng-model="movie.name"></td>
+                                        <td><input type="text" placeholder="Year" ng-model="movie.year"></td>
+                                        <td><input type="text" placeholder="Director" ng-model="movie.director"></td>
+                                    </tr>
+                                    <tr class="gradeC">
+                                        <td><input type="text" placeholder="Music Director" ng-model="movie.musicDirector"></td>
+                                        <td><input type="text" placeholder="Hero" ng-model="movie.hero"></td>
+                                        <td><input type="text" placeholder="Heroine" ng-model="movie.heroin"></td>
+                                    </tr>
+                                    <tr class="gradeC">
+                                        <td colspan="3"><input type="text" placeholder="URL" class="form-control" ng-model="movie.url"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Songs
+                            <button type="button" class="btn btn-primary" ng-click="addSong()">Add Song</button>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Written By</th>
+                                            <th>Singers</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="gradeC" ng-repeat="song in movie.songs">
+                                            <td><input type="text" class="form-control" ng-model="movie.songs[$index].title" value="{{song.title}}"></td>
+                                            <td><input type="text" class="form-control" ng-model="movie.songs[$index].writtenBy" value="{{song.writtenBy}}"></td>
+                                            <td><input type="text" class="form-control" ng-model="movie.songs[$index].singers" value="{{song.singers}}"></td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-circle" ng-click="removeSong($index)">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').dataTable();
+    });
+    </script>
+
+</body>
+
+</html>
