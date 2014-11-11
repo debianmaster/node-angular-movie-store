@@ -8,3 +8,5 @@ node app.js
 ## visit
 
 http://localhost:8008
+
+![alt tag](https://raw.githubusercontent.com/debianmaster/node-angular-movie-store/master/ScreenShot.PNG)
