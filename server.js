@@ -75,4 +75,4 @@ app.post('/saveMovie', function(req, res){
         }
     })
 });
-app.listen(8008);
+app.listen(8080);
