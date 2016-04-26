@@ -1,0 +1,26 @@
+{
+  "name": "node-angular-movie-store",
+  "version": "1.0.0",
+  "description": "edit app.js to provide your parse.com appid and appsecret",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.10.2",
+    "body-parser": "^1.9.2",
+    "parse": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debianmaster/node-angular-movie-store.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debianmaster/node-angular-movie-store/issues"
+  },
+  "homepage": "https://github.com/debianmaster/node-angular-movie-store#readme"
+}
