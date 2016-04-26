@@ -4,7 +4,7 @@ var app = express();
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 var Parse = require('parse').Parse;
-Parse.initialize("Sz0IdummyOxVdummyw5qrD7GY8sgk2okqU7u", "CgPYY88M9yCTdummy8HyROUdummyuA");
+Parse.initialize(process.env.appKey, process.env.JsKey);
 var Movie = Parse.Object.extend("MovieItem");
 
 app.post('/storeMovie', function(req, res){
